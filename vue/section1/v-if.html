@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="error = !error">error true/false</button>
+    <p v-if="error">에러 발생 : 이미지를 로드하지 못했습니다.</p>
+    <p v-else-if="appear">에러 발생하지 않았지만 이미지는 없습니다.</p>
+    <p v-else>마지막 else 로 만들어진 p요소입니다.</p>
+  </div>
+
+  <div id="apps">
+    <button v-on:click="login = !login">임시로그인 버튼</button>
+
+    <!-- 로긴 true -->
+    <p v-if="login">아이디를 입력해주세요</p>
+    <input type="text" v-if="login">
+    <!-- 로긴 false -->
+    <p v-else>로그인을 하였습니다</p>
+  </div>
+
+  <script>
+    new Vue ({
+      el : "#app",
+      data: { 
+        error : false,//비교연산자 넣어서 값이 true면 true , '' == false
+        appear : false,
+      }
+    })
+
+    new Vue ({
+      el: "#apps",
+      data: {
+        login : false,
+      }
+    })
+  </script>
+</body>
+</html>

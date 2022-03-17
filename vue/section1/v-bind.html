@@ -28,19 +28,35 @@
     -->
     <input type="text" :value="sDate" disabled>
     <p>{{ sTime }}</p>
+
+    <h2>v-bind</h2>
+    <p>{{ name + 'ㄱㄱ' }}</p>
+    <input type="checkbox" :checked="checked">
+    <img src="" alt="" :src="image">
+
+    <h3>머스태치의 사용방법</h3>
+    <p>산술연산자 사용가능 : {{ 1-30 }}</p>
+    <p>관계비교 연산자 사용가능{{ 1>40 }}</p>
+    <p>삼항연산자 : {{ 1>40 ? '참입니다' : '거짓입니다'  }}</p>
+    <p>data의 값을 넣어 연산자 사용 가능 : {{ sColor=="red" ? "빨간색" : "파란색" }}</p>
   </div>
+
 
   <script>
     new Vue({
       el: '#app',
       data : {
         sDate: "현재 년도 : "+new Date().getFullYear(),
-        sColor: "red", // 컬러 이름을 바꿔서 확인
+        sColor: "blue", // 컬러 이름을 바꿔서 확인
         sTime: `${new Date().getHours()}:${new Date().getMinutes()}`,
         disable: true,
-
+        checked: true,
+        name: "rainbow",
+        image: "https://cdn.pixabay.com/photo/2020/09/26/07/05/sea-5603351_960_720.jpg"
       }
     });
+
+
   </script>
 
 </body>
