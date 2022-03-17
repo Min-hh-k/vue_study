@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="name='나비'">
+      클릭하면 이름이 바뀝니다
+    </button>
+    <button v-on:mouseover="name='삼식'">
+      마우스를 올리면 이름이 바뀝니다
+    </button>
+
+    <p>{{ name }}</p>
+    <!-- 버튼을 누르면 count 값이 0이 되는 이벤트 -->
+    <button @click="countZero">카운트 제로</button>
+
+    <!-- 버튼을 누르면 count 값이 1씩 증가하는 이벤트 -->
+    <button @click="countPlus">카운트</button>
+    <p>{{ count }}</p>
+
+    <!-- 제출 이벤트가 페이지 리로드 X // .prevent == .preventDefault()  -->
+    <h2>form submit event</h2>
+    <form @submit.prevent="formSubmit">
+      <input type="text">
+      <input type="submit">
+    </form>
+    <p>{{ result }}</p>
+
+    <!-- 키 이벤트와 수식어를 통해 특정한 키를 눌렀을때 이벤트 발생 -->
+    <h2>keydown, keyup</h2>
+    <p>space 누르면 카운트 1씩 증가, delete 키 누르면 카운트제로</p>
+    <input type="text" @keydown.space="countPlus" @keyup.delete="countZero">
+
+
+    <!-- 홀짝 확인 -->
+    <h2>홀짝 확인</h2>
+    <!-- v-model로 value 값 전달 / 없으면 boolean값-->
+    <input type="radio" name="num" value="1" v-model="usernum">홀
+    <input type="radio" name="num" value="0" v-model="usernum">짝
+    <button @click="randomNum">결과확인</button>
+    <p>결과 : {{ results }}</p>
+
+  </div>
+
+
+  <script>
+    new Vue ({
+      el: '#app',
+
+      data: {
+        name: '빈 이름',
+        count: 0,
+        result: '',
+        results: '',
+        usernum: 1,
+        ranNum: true,
+
+      },
+      
+      methods: {
+        countPlus() {this.count++;},
+        countZero() {this.count = 0},
+        formSubmit() {this.result='submit ㄱㄱㄱ'},
+        randomNum() {
+          // 0 or 1 출력
+          let ranNum = Math.floor(Math.random()*2)*10
+          // usernum 값과 ranNum 값을 비교해서 맞습니다, 틀립니다 출력
+          if(ranNum == this.usernum){
+            this.results = "맞습니다!"
+          }
+          else {
+            this.results = "틀렸습니다ㅜ"
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

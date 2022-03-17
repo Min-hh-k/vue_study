@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    tr {
+      text-align: center;
+    }
+
+    td {
+      border: solid 1px black;
+    }
+    /* 홀수(odd), 짝수(even) tr 색칠, 첫번째 줄 기준 */
+    #table1 tr:nth-of-type(even) { 
+      background-color: yellowgreen;
+    }
+    #table1 tr:first-child {
+      background-color: chartreuse;
+    }
+
+    #table2 tr:nth-of-type(odd) {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+      <h1>v-for</h1>
+      <ul>
+          <!-- books 라는 배열 값을 item에 담아서 사용-->
+          <li v-for="item in books">{{ item.title + ' // ' + item.stock}}</li>
+          <br>
+          <li v-for="item in books">{{ `${item.title}이 ${item.stock}권이 남았습니다` }}</li>
+          <br>
+          <!-- n in 숫자 를 사용하여 1~숫자 까지 반복 -->
+          <li v-for="n in 10">{{ n }}</li>
+        </ul>
+
+        <ul>
+          <!-- 객체도 배열과 동일하게 반복문을 사용 할 수 있다 -->
+          <li v-for="value in people">{{ value  }}</li>
+        </ul>
+
+        <h2>빌린사람</h2>
+        <ol>
+          <li v-for="names in borrow">{{ `${names.name}` }}</li>
+        </ol>
+
+        <h2>도서목록  테이블</h2>
+        <table id="table1">
+          <tr>
+            <td>도서번호</td>
+            <td>도서명</td>
+            <td>재고량</td>
+          </tr>
+          <tr v-for="item in books">
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.stock }}</td>
+          </tr>
+        </table>
+
+        <h1>실습</h1>
+        <p>td v-for='n in 2' 와 namelist 이용</p>
+        <table id="table2">
+          <tr>
+            <td>이름</td>
+            <td>도서명</td>
+            
+          </tr>
+          <tr v-for="name in namelist">
+            <td>{{ name.name }}</td>
+            <td v-for="n in 2">{{ name.book[n-1] }}</td>
+            <!-- <td v-for="n in 1">{{ name.book[0] }}</td>
+            <td >{{ name.book[1] }}</td> -->
+          </tr>
+
+
+        </table>
+  </div>
+
+  <script>
+    new Vue ({
+      el: "#app",
+      data: {
+        books: [
+        {id:1, title: "마지막 수업", stock:1},
+        {id:2, title: "불편한 편의점", stock:2},
+        {id:3, title: "자세를 고쳐 앉자", stock:0},
+        {id:4, title: "거북목 방지", stock:1},
+        {id:5, title: "허리수술 3천만원+", stock:3},
+        ],
+        people: {
+          name: '홍길동',
+          bookscount: '5',
+        },
+        borrow: [
+          {name: '철수'},
+          {name: '영희'},
+        ],
+        namelist: [
+          {name: '철수', book:['그리스 로마신화']},
+          {name: '영희', book:['월씽킹', "불편한 편의점"]},
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
