@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="name">
+    <button @click="messageAlert">누르면 alert 발생</button>
+  </div>
+
+  <script>
+    new Vue ({
+      el: '#app',
+      data: {
+        name: "홍길동",
+        message : "data의 메세지 입니다"
+      },
+      methods: {
+        messageAlert(e) {
+          alert(this.name + "님 " + this.message)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
