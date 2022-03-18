@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>v-model의 값</h1>
+
+    <!-- 
+      type="text" 일 때,
+      v-model은 value 값을 양방향으로 바인딩 한다 -->
+    <input type="text" v-model="text">
+
+      <!-- v-model에 연결된 data 속성이 배열이 아닐 때 checked의 boolean 값을 들고온다 -->
+      <input type="checkbox"></input>
+
+    <!-- 
+      type="checkbox" 일 떄
+      v-model 에 연결 된 data 속성이 배열일 떄 value 값을 들고 올 수 있다
+    -->
+    <input type="checkbox"  name="check" value="확인" v-model="ok">
+    <input type="checkbox" name="check" value="종료" v-model="ok">
+
+    <div id='example-3'>
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames">
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+      <label for="mike">Mike</label>
+      <br>
+      <span>체크한 이름: {{ checkedNames }}</span>
+    </div>
+
+    <!-- type='radio'는 value 값이 없으면 null 반환 -->
+    <br>
+    <input type="radio" name="radio" value="홀" v-model="num"> 1
+    
+    <!-- type='radio'는 같은 name의 선택된 value 값 반환 -->
+    <br>
+    <input type="radio" name="radio" value="홀" v-model="num"> 1
+    <input type="radio" name="radio" value="짝" v-model="num"> 2
+
+
+  </div>
+
+  <script>
+    new Vue ({
+      el: '#app',
+      data: {
+        text: "미리작성된 텍스트",
+        checked: false,
+        ok: [],
+        checkedNames: [],
+        num: ''
+      }
+    })
+  </script>
+</body>
+</html>

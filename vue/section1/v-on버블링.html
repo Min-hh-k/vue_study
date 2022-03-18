@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .div {
+      background-color: cornsilk;
+      border: 1px solid black;
+    }
+    p {
+      background-color: mediumpurple;
+      border: 1px solid black;
+    }
+    
+    span {
+      background-color: palevioletred;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+    <!--
+      버블링 현상 막기위해 @click.stop 을 붙이거나
+      methods msg에 e.stopPropagation() 추가 
+    -->
+  <div id="app">
+    <div class="div" @click="msg" id="div">
+      <p @click.stop="msg" id="p">p태그 안의 <span @click="msg" id="span">span 태그</span></p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+  <script>
+    new Vue ({
+      el: "#app",
+      data: {
+
+      },
+      methods: {
+        msg(e) {
+          e.stopPropagation()
+          return alert(e.target.id + ":" + e.currentTarget.id) 
+        }
+      }
+    })
+  </script>
+</body>
+</html>
