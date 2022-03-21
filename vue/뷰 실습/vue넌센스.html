@@ -6,29 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <style>
-    .hide {
-      display: none;
-    }
-  </style>
+
 </head>
 <body>
   <div id="app">
     <h1>{{ title }}</h1>
     <p>3문제맞추기 // 중복있음</p>
-    
+    <!-- 머스태치를 이용하여 time 값 가져오기 -->
     <p>{{ time }}초</p>
     
-
+    <!-- @click 이벤트 : show 값 변경, 초기화, 퀴즈시작 -->
       <h2><a @click.prevent="showBtn">Start!</a></h2>
 
-
+    <!-- v-on을 이용한 이벤트 : 값을 들고 와서 비교 후, 3문제가 지나면 종료 -->
       <form v-if="show" @submit.prevent="onSubmit">
-        <input type="text" v-model="useranswer">
+
+        <!-- 머스테치를 이용해서 quiz 값 가져오기 : computed random quiz들고옴 -->
         <h3>{{ quiz }}</h3>
-        <input type="submit">
+
+        <!-- v-model을 이용항 양방향 -->
+        <input type="text" v-model="useranswer">
+
         <p>(띄워쓰기X)</p>
-        <p>(값을 입력후 enter or 제출버튼 누르세요)</p>
+        <p>(값을 입력후 enter)</p>
       </form>
 
     <p v-show="show">{{ score }}</p>
@@ -52,8 +52,6 @@
         useranswer: '',
         score: 0,
         count: 0,
-        randomNum:0,
-        sec: 0,
         show: false,
         usedQuiz: [],
         quizlist: [
@@ -70,37 +68,51 @@
         ]
       },
       methods: {
-        showBtn() {
-          this.quizlist = this.quizlist.concat(this.usedQuiz)
+        showBtn: function () {
+          // 초기화
+          this.quizlist = this.quizlist.concat(this.usedQuiz);
+
           this.score = 0;
           this.count = 0;
-          this.show = !this.show
-          clearTimeout(this.timeId)
-          this.time = 0
+          this.show = !this.show;
+          clearTimeout(this.timeId);
+          this.time = 0;
           if(this.show) {
-            this.timeId = setInterval(()=> {this.time++, 1000})
+            this.timeId = setInterval(() => {this.time++}, 1000);
           }
-          this.startquiz()
+          this.startquiz();
         },
         onSubmit() {
-        if(this.useranswer == this.quizlist[this.random].answer) {
-          this.score++
-          this.usedquiz.push(this.quizArray.splice(this.random,1)[0])
+        if (this.useranswer == this.quizlist[this.random].answer) {
+          this.score++;
+          // splice(인덱스, 삭제할 갯수) : 삭제한 요소를 배열로 반환
+          this.usedQuiz.push(this.quizlist.splice(this.random, 1)[0]);
         }
-        this.startquiz()
-        
-        this.count++
-        this.useranswer = ''
+          this.startquiz();
 
-      },
-      },
+          //총 개수값 증가
+          this.count++;
+          this.useranswer = "";
 
+          // 3번 지났을 때 종료
+          if (this.count == 3) {
+            this.show = false;
+            clearTimeout(this.timeId);
+          }
+        },
+        startquiz() {
+          // 랜덤값 바꾸기
+          this.random = Math.floor((Math.random()*this.quizlist.length));
+        },
+      },
       computed: {
+        // 퀴즈 화면에 출력
         quiz() {
-          return this.quizArray[this.random].quiz;
-        }
+          return this.quizlist[this.random].quiz;
+        },
       }
     })
+
   </script>
 </body>
 </html>
