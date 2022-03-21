@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ title }}</h1>
+    <p>3문제맞추기 // 중복있음</p>
+    
+    <p>{{ time }}초</p>
+    
+
+      <h2><a @click.prevent="showBtn">Start!</a></h2>
+
+
+      <form v-if="show" @submit.prevent="onSubmit">
+        <input type="text" v-model="useranswer">
+        <h3>{{ quiz }}</h3>
+        <input type="submit">
+        <p>(띄워쓰기X)</p>
+        <p>(값을 입력후 enter or 제출버튼 누르세요)</p>
+      </form>
+
+    <p v-show="show">{{ score }}</p>
+
+
+    </div>
+
+
+
+
+
+
+  <script>
+    new Vue ({
+      el: '#app',
+      data: {
+        title:"넌센스 퀴즈",
+        random: 0,
+        time: 0,
+        timeId: '',
+        useranswer: '',
+        score: 0,
+        count: 0,
+        randomNum:0,
+        sec: 0,
+        show: false,
+        usedQuiz: [],
+        quizlist: [
+        {quiz:"자가용의 반대말은?", answer:"커용"},
+        {quiz:"전주비빔밥의 반대말은?", answer:"이번주비빔밥"},
+        {quiz:"추장보다 높은 사람은?", answer:"고추장"},
+        {quiz:"꽃가게 주인이 제일 싫어하는 나라는?", answer:"시드니"},
+        {quiz:"해가 울면?", answer:"해운대"},
+        {quiz:"96*3", answer:"288"},
+        {quiz:"왕이 꿈틀대면?", answer:"왕꿈틀이"},
+        {quiz:"세계에서 몸집이 제일 큰 여자의 이름은?", answer:"태평양"},
+        {quiz:"길에서 죽은 사람은?", answer:"도사"},
+        {quiz:"중학생과 고등학생이 타는 차는?", answer:"중고차"},
+        ]
+      },
+      methods: {
+        showBtn() {
+          this.quizlist = this.quizlist.concat(this.usedQuiz)
+          this.score = 0;
+          this.count = 0;
+          this.show = !this.show
+          clearTimeout(this.timeId)
+          this.time = 0
+          if(this.show) {
+            this.timeId = setInterval(()=> {this.time++, 1000})
+          }
+          this.startquiz()
+        },
+        onSubmit() {
+        if(this.useranswer == this.quizlist[this.random].answer) {
+          this.score++
+          this.usedquiz.push(this.quizArray.splice(this.random,1)[0])
+        }
+        this.startquiz()
+        
+        this.count++
+        this.useranswer = ''
+
+      },
+      },
+
+      computed: {
+        quiz() {
+          return this.quizArray[this.random].quiz;
+        }
+      }
+    })
+  </script>
+</body>
+</html>
