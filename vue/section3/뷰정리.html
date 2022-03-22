@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <!-- 메서드를 이벤트나 이름을 적어 직접 호출해서 사용 -->
+    <button @click="changeMessage('입력받은값')">메세지변경</button>
+    <button @click="clickBtn">버튼메서드를 이용해 메시지 바꿈</button>
+
+    <p>{{ rm }}</p>
+    <!-- data의 값이 변경되었을 때 계산값을 보여줄 때 computed -->
+    <p>{{ reverseMessage }}</p>
+  </div>
+
+  <script>
+    //js 객체(인스턴스)
+    let pen = {
+      //속성
+      length : 10,
+      //메서드
+      write : function() {
+        return "문자를 되돌려준다"
+      }
+    }
+    // 뷰 인스턴스
+    new Vue ({
+      el: '#app',
+      data: {
+        message: "메세지",
+        rm: "", // 뒤집어진 메세지 저장
+      },
+      methods: {
+        changeMessage: function(m) { //changeMessage('입력받은값' == m)
+          this.message = m + " 바꿔준 메서드^%^"
+        },
+        clickBtn: function () {
+          // 메서드는 직접 호출하여 사용가능
+          this.changeMessage( pen.write() )
+        },
+
+      },
+      computed: { // 계산된 값
+        reverseMessage : function() {
+          let rm =  this.message.split('').reverse().join('');
+          return rm
+        },
+      },
+    })
+  </script>
+</body>
+</html>
