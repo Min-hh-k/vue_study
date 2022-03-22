@@ -17,10 +17,22 @@
 
     <counter-component></counter-component>
     <counter-component></counter-component>
+
+
+    <!-- 컴포넌트 안에 컴포넌트 사용하여 불러옴  -->
+    <used-component></used-component>
+
+      <!-- Vue 인스턴스에 등록된 지역 컴포넌트 -->
+      <incase-component></incase-component>
+
+      <mychild-component></mychild-component>
+      <mychild2-component></mychild2-component>
+
+
   </div>
 
   <script>
-    // 컴포넌트 등록
+    // 컴포넌트 등록할 땐 뷰 인스턴스 위에 등록
     Vue.component('my-component', {
       template : // html 요소를 이용하여 화면 구성
       // 반드시 하나의 요소로 내보낼 것, : div로 감싸서 내보냄
@@ -72,8 +84,43 @@
       },
     })
 
+
+    // 다른컴포넌트에서 사용하기 위한 컴포넌트
+    Vue.component('small-component', {
+      template : 
+      `
+      <p>hi</p>
+      `
+    })
+
+    // 다른컴포넌트를 템플릿에 불러와서 사용
+    Vue.component('used-component', {
+      template : 
+      `
+      <div>
+        <p>used-component</p>
+
+        <!-- 전역컴포넌트를 불러옴 -->
+        <small-component></small-component>
+        <!-- <incase-component></incase-component>  사용불가 -->
+      </div>  
+      `
+    })
+
+
     new Vue({
       el: '#app',
+      components : {
+        'incase-component' : {
+          template : `<p>Vue 인스턴스(div #app))에서만 쓸 수 있는 컴포넌트</p>`
+        },
+        'mychild-component' : {
+          template : `<p>Vue 인스턴스의 첫번째 지역컴포넌트</p>`
+        },
+        'mychild2-component' : {
+          template : `<p>Vue 인스턴스의 두번째 지역컴포넌트</p>`
+        },
+      },
 
     })
   </script>
