@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <p>{{ count }}</p>
+    <counter-component @counter="receiveCounter"></counter-component>
+    <counter-component @counter="receiveCounter"></counter-component>
+
+
+  </div>
+
+  <script>
+  Vue.component('counter-component', {
+    template: 
+    `
+    <div>
+      <button @click="countUp">{{ count }}</button>
+      <button @click="sendCount">카운트 값 전달</button>
+    </div>
+    `,
+    data : function () {
+      return {
+        count : 0,
+      }
+    },
+    methods: {
+      // 3) 자식컴포넌트의 메서드에서 이벤트를 만들어서 호출
+      sendCount() {
+        this.$emit("counter", this.count)
+      },
+      countUp() {
+          this.count += 1
+        },
+    },
+  })
+
+
+  new Vue ({
+    el: '#app',
+    data: {
+      // 1) 자식의 값을 받을 메시지
+      count : 0,
+    },
+    methods: {
+      // 7) 메서드를 호출하고 받아온 인수값(msg)을 this.count 에 할당
+      receiveCounter(msg) {
+        this.count = msg;
+      }
+    }
+  })
+  </script>
+
+
+</body>
+</html>
