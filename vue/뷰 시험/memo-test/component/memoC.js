@@ -1,17 +1,16 @@
 Vue.component('memo-component', {
-  //props 는 임으로 생성해준 속성, 변수 
-  props : ['id','colorid'],
+  props : ['id'],
   template: 
   `
   <div>
-      <h4>메모 <button @click="deletememo">X</button></h4>
       <slot></slot>
+      <hr></hr>
       <p>{{ time }}</p>
   </div>
   `,
   data: function() {
     return {
-      time : new Date()
+      time : new Date().getFullYear()+"년 "+new Date().getMonth()+"월 "+new Date().getDay()+"일"
     }
   },
   methods: {

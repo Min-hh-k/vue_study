@@ -6,28 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    #app textarea {
+      display: block;
+    }
+
+  </style>
 </head>
 <body>
   <div id="app">
+    <h2>메모</h2>
     <input type="text" v-model="memo">
     <button @click="addMemo">추가</button>
+    <textarea type="textarea" rows="7" cols="33" v-model="memoarea"></textarea>
+
     <memo-Component 
     v-for="m in memolist" 
     :key="m.id"
     :id="m.id" 
-    colorid="blue"
     @delete="deletememo">
-      {{ m.memo }}
+    <h4> 
+      {{ m.memo }} 
+      <button @click="deletememo">X</button>
+    </h4>
+      {{ m.memoarea }}
     </memo-Component>
-    <!-- 
-      :id 는 개별의 id 값 부여
-      colorid 는 고정된 속성값 
-    -->
+
   </div>
 
-
-  <!-- 사용할 컴포넌트 -->
-  <script src="./component/memoComponent.js"></script>
+  
+  <!-- 메모C 컴포넌트 -->
+  <script src="./component/memoC.js"></script>
   <!-- 뷰인스턴스 -->
   <script src="./main.js"></script>
 </body>
