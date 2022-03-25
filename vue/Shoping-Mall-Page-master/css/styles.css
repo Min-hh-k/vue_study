@@ -120,10 +120,6 @@ p {
   width: 50%;
 }
 
-/* .review {
-  display: flex;
-} */
-
 .review-form {
   display: flex;
   flex-direction: column;

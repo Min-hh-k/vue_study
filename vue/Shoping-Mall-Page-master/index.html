@@ -12,21 +12,22 @@
 </head>
 <body>
     <div id="app">
-
+        <div class="nav-bar"></div>
+        <div class="cart">장바구니</div>
         <product-display></product-display>
 
     <!-- 리뷰 작성 폼 -->
     <div class="review">
-        <form class="review-form" @submit.prevent="reviewSubmit">
+        <form class="review-form" @submit.prevent="reviewSubmit" >
         <h3>리뷰를 남기세요 </h3>
         <label for="name">이름 :</label>
-        <input type="text" v-model="name">
+        <input type="text" v-model="name" required>
     
         <label for="review">리뷰 :</label>
-        <input type="text" v-model="review">
+        <input type="text" v-model="review" required>
     
         <label for="starscore">별점</label>
-        <select id="starscore" v-model="starscore">
+        <select id="starscore" v-model="starscore" required>
             <option selected> 5점
             <option> 4점
             <option> 3점
@@ -35,7 +36,7 @@
         </select>
     
         <label for="bought">이 물건을 샀나요?</label>
-        <select id="bought" v-model="bought">
+        <select id="bought" v-model="bought" required>
             <option value="yes"> Yes
             <option value="no"> No
         </select>
