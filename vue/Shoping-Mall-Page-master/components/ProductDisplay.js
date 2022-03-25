@@ -22,6 +22,7 @@ Vue.component('product-display', {
     }
   },
   methods: {
+    // 선택한 상품을 index로 받아와서 수정
     updateVariant(index) {
       this.selection = index;
     },

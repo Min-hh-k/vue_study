@@ -47,13 +47,14 @@
 
         <!-- 리뷰리스트 (출력) -->
         <reviewform-component
-        v-for="r in reviews" 
-        :key="r.revies"
+
         >
             <div class="review-container">
                 <h3>리뷰 :</h3>
                 <ul>
-                    <li>
+                    <li
+                    v-for="r in reviews" 
+                    :key="r.revies">
                         {{ r.name }}님이 별점 {{ r.starscore }}을 주었습니다</br>
                         {{ r.review }}</br>
                         추천 : {{ r.bought }}
@@ -73,6 +74,7 @@
         new Vue({
             el : '#app',
             data: {
+                //리뷰에서 가져올 값
                 id : 0,
                 name: '',
                 review: '',
@@ -82,6 +84,7 @@
             },
             methods: {
                 reviewSubmit() {
+                    // 리뷰에서 작성된 값을 객체로 만들기
                     this.reviews.push( {id:this.id, name:this.name, review:this.review, starscore:this.starscore, bought:this.bought} )
                     this.id++;
                     this.name;
