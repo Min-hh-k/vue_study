@@ -32,12 +32,17 @@ body {
   box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
 }
 
+.color-circle-whole {
+  display: flex;
+}
+
 .color-circle {
   width: 50px;
   height: 50px;
   margin-top: 8px;
   border: 2px solid #d8d8d8;
   border-radius: 50%;
+  margin-right: 10px;
 
 }
 
@@ -114,6 +119,10 @@ p {
 .product-info {
   width: 50%;
 }
+
+/* .review {
+  display: flex;
+} */
 
 .review-form {
   display: flex;

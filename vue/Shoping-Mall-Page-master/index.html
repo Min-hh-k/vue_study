@@ -15,16 +15,80 @@
 
         <product-display></product-display>
 
+    <!-- 리뷰 작성 폼 -->
+    <div class="review">
+        <form class="review-form" @submit.prevent="reviewSubmit">
+        <h3>리뷰를 남기세요 </h3>
+        <label for="name">이름 :</label>
+        <input type="text" v-model="name">
+    
+        <label for="review">리뷰 :</label>
+        <input type="text" v-model="review">
+    
+        <label for="starscore">별점</label>
+        <select id="starscore" v-model="starscore">
+            <option selected> 5점
+            <option> 4점
+            <option> 3점
+            <option> 2점
+            <option> 1점
+        </select>
+    
+        <label for="bought">이 물건을 샀나요?</label>
+        <select id="bought" v-model="bought">
+            <option value="yes"> Yes
+            <option value="no"> No
+        </select>
+    
+        <input type="submit" class="button">
+        </form>
+
+
+        <!-- 리뷰리스트 (출력) -->
+        <reviewform-component
+        v-for="r in reviews" 
+        :key="r.revies"
+        >
+            <div class="review-container">
+                <h3>리뷰 :</h3>
+                <ul>
+                    <li>
+                        {{ r.name }}님이 별점 {{ r.starscore }}을 주었습니다</br>
+                        {{ r.review }}</br>
+                        추천 : {{ r.bought }}
+                    </li>
+                </ul>
+            </div>
+        </reviewform-component>
     </div>
-
-
+    
+</div>
     <!-- 컴포넌트 -->
     <script src="./components/ProductDisplay.js"></script>
+    <script src="./components/Reviewform.js"></script>
 
     <!-- Vue app -->
     <script>
         new Vue({
-            el : '#app'
+            el : '#app',
+            data: {
+                id : 0,
+                name: '',
+                review: '',
+                starscore: '',
+                bought: '',
+                reviews : []
+            },
+            methods: {
+                reviewSubmit() {
+                    this.reviews.push( {id:this.id, name:this.name, review:this.review, starscore:this.starscore, bought:this.bought} )
+                    this.id++;
+                    this.name;
+                    this.review;
+                    this.starscore;
+                    this.boutght;
+                },
+            }
         })
     </script>
 

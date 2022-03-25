@@ -60,12 +60,16 @@ Vue.component('product-display', {
           </ul>
           <!-- 색상 바꾸기 -->
           <!-- 값을 두개 들고오면 뒤에 오는 값은 배열의 인덱스 값 -->
+          <div class="color-circle-whole">
           <div 
             class="color-circle" 
             v-for="(variant, index) in variants" 
-            :style="{backgroundColor: variant.color}"
+            :style="{
+              backgroundColor: variant.color
+            }"
             @mouseover="updateVariant(index)">
             
+            </div>
             </div>
           <!-- 버튼 -->
           <button 
