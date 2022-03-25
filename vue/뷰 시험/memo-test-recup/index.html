@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- submit 이벤트는 form 태그에 달아서 전달 -->
+    <form @submit.prevent="addMemo">
+      <h1>메모</h1>
+      <input type="text" v-model="title"> <br>
+      <textarea cols="25" rows="10" v-model="memo"></textarea>
+      <input type="submit" value="추가" v-on:click="addMemo">
+    </form>
+
+
+      <memo-component v-for="m in list" :key="m.id" :id="m.id" @delete="deleteMemo">
+        <template v-slot:title>
+          {{ m.title }}
+        </template>
+        <template v-slot:memo>
+          {{ m.memo }}
+        </template>
+      </memo-component>
+
+
+
+  </div>
+
+  <script>
+    Vue.component('memo-component', {
+      props: ['id'], // 삭제할 때 자신이 어떤 위치의 데이터를 가지고 있는지 알려주는 역할
+      template: 
+      `
+      <div class="memo">
+        <h3>
+          <slot name="title"></slot>
+          <button @click="deleteMemo">X</button>
+        </h3>
+        <slot name="memo"></slot>
+        <hr>
+        <p>{{ fomatTime }}</p>
+      </div>
+      `,
+      data() {
+        return {
+          time : new Date()
+        }
+      },
+      computed: {
+        fomatTime() {
+          return this.time.getFullYear()+ "년 " + 
+          (this.time.getMonth()+1)+"월 " + 
+          this.time.getDate() + "일 " + 
+          this.time.getHours() + "시 " + 
+          this.time.getMinutes()+ "분"
+        },
+        deleteMemo() {
+          // props로 받아온 id 값을 이벤트와 함께 인수로 보냄
+          this.$emit('delete', this.id)
+        },
+      }
+    })
+
+    new Vue ({
+      el: '#app',
+      data: {
+        id: 0,
+        title: "",
+        memo: "",
+        list: [],
+      },
+      methods: {
+        addMemo() {
+          //title과 memo의 값을 가져와서 , memolist에 추가
+          this.list.push({id:this.id, title:this.title, memo:this.memo, })
+          this.id++ //id 의 값을 겹치지 않게 하기 위해 1씩 증가
+        },
+        deleteMemo() {
+          // memolist 의 요소를 삭제
+          // 배열의 splice(인덱스,갯수) 메서드를 이용해서 삭제
+          // 문제 : 배열의 요소가 객체이기에 인덱스를 찾는 함수 사용x
+          // 해결 : 객체안의 id값을 비교해서 index 값을 찾아냄
+          // 생각 : 배열 값을 하나씩 비교하기 위해 for, forEach()
+          // 방법 : 객체안의 id값을 하나씩 비교하기 위해 forEach() 사용
+        let index = 0;
+        this.list.forEach((element, i) => {
+          if(element.id == id) {
+            index = i;
+          } 
+        })
+        this.list.splice(index, 1);
+
+        },
+
+      }
+    })
+  </script>
+</body>
+</html>
