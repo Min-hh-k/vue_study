@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+  <div id="app">
+    <!-- v-app으로 감싸서 실행 -->
+    <v-app>
+      <v-app-bar app color="primary" dark fixed>
+        <!-- 좌측의 메뉴아이콘 -->
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-toolbar-title>마스터페이지</v-toolbar-title>
+        <!-- 추가메뉴 아이콘을 넣기위해 띄우는 역할 -->
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <!-- mdi 머티리얼 공식디자인에서 가져온 아이콘,, 이름을 가져와서 작성 -->
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-app-bar>
+    </v-app>
+
+    <v-content>
+      <v-container>
+        <!-- html 태그에 뷰티파이 디자인을 넣을때 class를 통해서 접근 -->
+        <h1 class="display-2 my-10 red--text">안녕하세요</h1>
+        <p class="body-2">마스터 페이지입니다</p>
+        <!-- 구분선 출력 -->
+        <v-divider></v-divider>
+        <!-- red-text , 색만 작성하면 배경색이 들어간다 -->
+        <v-btn color="blue red--text">버튼</v-btn>
+      </v-container>
+    </v-content>
+
+    <v-footer color="secondary" dark fixed>
+      <div class="mx-auto">Copyright &copy;</div>
+    </v-footer>
+  </div>
+
+    
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  
+  <script>
+
+    new Vue({
+      el: '#app',
+      // 뷰티파이 객체 추가
+      vuetify: new Vuetify(),
+    })
+  </script>
+</body>
+</html>
