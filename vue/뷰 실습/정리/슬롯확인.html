@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <slot-component>
+    <p slot="first">첫번째 슬롯</p></p>
+    <p slot="second">두번째 슬롯</p>
+    </slot-component>
+
+    <slot-component>
+      <template v-slot:first>
+        v슬롯을 사용한 첫번째 값
+      </template> <br/>
+      <template v-slot:second>
+        v슬롯을 사용한 두번째 값
+      </template>
+    </slot-component>
+  </div>
+
+  <script>
+    Vue.component('slot-component', {
+      template: 
+      `
+      <div>
+        <p>슬롯 확인 위한 컴포넌트</p>
+        <slot name="first"></slot>
+        <slot name="second"></slot>
+      </div>
+      `,
+    })
+
+    new Vue ({
+      el: '#app',
+      data: {
+
+      }
+    })
+  </script>
+</body>
+</html>

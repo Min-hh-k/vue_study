@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  Vue 전체 정리
+● v-디렉티브 : Vue에서 제공하는 특수 속성
+
+v-on
+1) 클릭했을 때, 메소드 chageMessage를 실행시키기 위해 어떻게 코드를 작성하세요.
+  <p @click="changeMessage"></p>
+  data: {
+    methods: {
+      changeMessage() {
+        return ~
+      }
+    }
+  }
+2) 클릭했을 때, 데이터 중 불린 값을 가진 check의 값을 부정(반대)하기 위한 식을 사용하여
+코드를 작성하세요
+  <P @click="check = !check"></P>
+3) v-on의 약자는 무엇인지 쓰시오
+  @
+
+v-for / key
+1) p태그를 반복해서 사용하기 위한 코드를 작성하세요.
+- 배열인 경우 array : <p v-for="a in array">{{ a }}}</p>
+- 객체인 경우 obj : <p v-for="b in obj">{{ b }}}</p>
+- 숫자인 경우 num : <p v-for="c in num or 5">{{ c }}}</p>
+2) v-for에서 사용한 변수를 사용할 수 있는 곳이 아닌 곳을 고르세요 3
+① v-for가 사용된 태그 안에 있는 {{ }}
+② v-for가 사용된 같은 태그의 v-bind:key=" "
+③ v-for가 끝난 바깥의 태그의 {{ }} 
+
+v-bind
+1) v-bind를 이용하여 클래스를 연결하기 위해 사용하는 방식은 어떤 것이 있는지 코드와 실
+행 방식에 대해서 작성해보세요.
+* 클래스 이름 : on, red_style, blu_style
+* data { className: "on" , colorStyle : "red" , buttonOn : true}
+- 데이터 옵션의 값을 이용해서 : <p :class="className"></p>
+- 데이터 옵션의 값과 문자열을 이용해서 : <p :class="colorStyle+ '_style'"></p>
+- v-bind:class=" " 안에 객체형식을 이용해서 : <p :class="{on : buttonOn}"> </p>
+2) v-bind를 이용하여 image를 연결하는 코드를 작성하시오
+* 이미지 정보 위치 : data { srcImg : "./img/image1.png" }
+  <img :src="srcImg" >
+3) v-bind의 약자는 무엇인지 쓰시오
+  :
+
+v-model
+1) 양방향 바인딩의 의미는 무엇인가요? 
+  출력화면(인풋)과 뷰인스턴스의 값을 서로 주고 받음
+  vue의 data와 html의 value (+ boolean) 값을 연결하여 한쪽이 바뀌면 한쪽 값을 바꿈
+2) textarea에 v-model을 사용하면 textarea의 속성 중 어느 값이 data에 들어가나요?
+  value
+
+
+● 컴포넌트 : 컴포넌트의 속성
+props이란? property의 약자로 재산, 소유물이라는 뜻이 있다.
+1) props값 name, age 를 받아오기 위해 컴포넌트 안에서 어떤 구조로 작성하는지 쓰시오
+  props: ['name', 'age']
+2) props 의 값 name을 template에서 어떻게 사용해야 하는지 쓰시오.
+  props: ['name', 'age'] 배열로 받아와서, 태그에 감싸서 {{ name }} 사용 ,
+  <p v-if="name"></p> 동일하게 속성이름을 사용
+3) props 의 값 name을 methods 에서 어떻게 사용해야 하는지 쓰시오.
+  this.name
+
+data
+1) 컴포넌트에서 data옵션을 사용할 때는 어떤 구조로 사용해야하는지 작성하시오
+  data() {
+    return {
+      데이터이름: 데이터값
+    }
+  }
+
+● 사용자 정의 이벤트 : $emit
+1) $emit 이 하는 일은 무엇인가요?
+  사용자 지정 이벤트 발생> delete,add, sub-count ...
+  this.$emit("이벤트이름", 인수)
+  
+2) $emit을 이용하여 자식컴포넌트의 버튼을 클릭했을 때, 부모컴포넌트에게 이벤트를 전달하
+는 과정을 그려보세요.
+* 사용자 정의 이벤트 : my-event
+* 자식 컴포넌트 메소드 : childMethod / 부모 컴포넌트 메소드 : parentMethod
+
+● 재사용을 위한 슬롯 : Unnamed, Named, Scoped slot과 v-slot의 역할은 완전히 동일
+1) 컴포넌트에 슬롯이 1개 있을 때는 어떠한 슬롯을 사용하는 것이 좋은지 쓰시오.
+(v-slot을 쓴다면 어떤 형태인지 같이 작성해 주세요)
+  Unnamed(컴포넌트 안에 바로 작성), <template v-slot></template> 
+2) 컴포넌트에 슬롯이 2개 이상 있을 때는 어떠한 슬롯을 사용하는 것이 좋은지 쓰시오.
+(v-slot을 쓴다면 어떤 형태인지 같이 작성해 주세요)
+  Naemd(<p slot="name"></p>), <template v-slot:name="scoped"></template>
+3) 2개의 슬롯이 있는 컴포넌트 하나를 작성하고 호출하여 슬롯의 내용을 채워서 출력하세요
+* 컴포넌트의 이름과 형식은 자유롭게 하면 됩니다.
+
+</body>
+</html>

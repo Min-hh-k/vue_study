@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/f93c6c2219.js" crossorigin="anonymous"></script>
+
+  <style>
+    .box {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .red {
+      color: red
+    }
+    i {
+      color: gray;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="app">
+    <ultra-component></ultra-component>
+  </div>
+
+  <script>
+    Vue.component('ultra-component', {
+      template: 
+      `
+      <div class="box">
+        <img src="./s22ultra.jpg">
+        <br/>
+        <h3>Galaxy S22 Ultra</h3>
+        <p>디스플레이 : 178.55mm</p>
+        <p>CPU종류: Octa-Core</p>
+        <i :class="{red:isRed}" @click="changeColor" class="fa-solid fa-heart"></i>
+
+      </div>
+      `,
+      data() {
+        return {
+          isRed: false,
+        }
+      },
+      methods: {
+        changeColor() {
+          this.isRed = !this.isRed
+        }
+      },
+
+    })
+
+    new Vue ({
+      el: '#app',
+      data: {
+        
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+</html>
