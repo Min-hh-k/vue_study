@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <v-content>
+      <v-container>
+        <v-row>
+          <!-- main title -->
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+          <v-col cols="12" md="12">
+            <!-- top tabs -->
+            <v-card>
+              <v-toolbar
+                color="cyan"
+                dark
+                flat
+              >
+                <v-app-bar-nav-icon @click="navopen = !navopen"></v-app-bar-nav-icon>
+          
+                <v-toolbar-title> ← Go Menu</v-toolbar-title>
+          
+                <v-spacer></v-spacer>
+          
+                <v-btn icon>
+                  <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+          
+                <v-btn icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+
+              </v-toolbar>
+          
+              <v-tabs-items >
+                <v-tab-item>
+
+                </v-tab-item>
+              </v-tabs-items>
+            </v-card>
+          </v-col>
+
+
+          <v-col cols="12" md="12">
+            <!-- slide window -->
+            <template >
+              <v-card
+                flat
+                tile
+                justify-center
+              >
+                <v-window
+                  v-model="onboarding"
+                  reverse
+                >
+                  <v-window-item
+                    v-for="n in length"
+                    :key="`card-${n}`"
+                  >
+                    <v-card
+                      color="grey"
+                      height="200"
+                    >
+                      <v-row
+                        class="fill-height"
+                        align="center"
+                        justify="center"
+                      >
+                        <h1
+                          style="font-size: 5rem;"
+                          class="white--text"
+                        >
+                          Slide {{ n }}
+                        </h1>
+                      </v-row>
+                    </v-card>
+                  </v-window-item>
+                </v-window>
+            
+                <v-card-actions class="justify-space-between">
+                  <v-btn
+                    text
+                    @click="prev"
+                  >
+                    <v-icon>mdi-chevron-left</v-icon>
+                  </v-btn>
+                  <v-item-group
+                    v-model="onboarding"
+                    class="text-center"
+                    mandatory
+                  >
+                    <v-item
+                      v-for="n in length"
+                      :key="`btn-${n}`"
+                      v-slot="{ active, toggle }"
+                    >
+                      <v-btn
+                        :input-value="active"
+                        icon
+                        @click="toggle"
+                      >
+                        <v-icon>mdi-record</v-icon>
+                      </v-btn>
+                    </v-item>
+                  </v-item-group>
+                  <v-btn
+                    text
+                    @click="next"
+                  >
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4" lg="3">
+            <v-card>dd</v-card>
+          </v-col>
+
+        </v-row>
+      </v-container>
+    </v-content>
+
+
+
+    <!-- left navigation -->
+
+    <v-navigation-drawer v-model="navopen" app dark>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+            카테고리
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            subtext
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+
+
+
+  </div>
+
+  <script>
+    new Vue ({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data () {
+      return {
+        navopen: false,
+        items: [
+          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
+          { title: 'Photos', icon: 'mdi-image' },
+          { title: 'About', icon: 'mdi-help-box' },
+          { title: 'Abouts', icon: 'mdi-help-box' },
+
+        ],
+        right: null,
+        // slide
+        length: 4,
+        onboarding: 0,
+        methods: {
+          //slide
+          next () {
+            this.onboarding = this.onboarding + 1 === this.length
+              ? 0
+              : this.onboarding + 1
+          },
+          prev () {
+            this.onboarding = this.onboarding - 1 < 0
+              ? this.length - 1
+              : this.onboarding - 1
+      },
+    },
+      }
+    },
+
+    })
+  </script>
+</body>
+</html>
