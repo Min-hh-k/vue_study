@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+        <!-- d-flex 뷰티파이 에서 제공해주는 플랙스클래스 - 속성사용가능 -->
+        <v-card height="100%" class="d-flex display-2 align-center justify-center">선택 : {{ select }}</v-card>
+      </v-main>
+
+      <v-footer>
+        <v-bottom-navigation dark absolute v-model="select">
+          <v-btn value="자전거">
+            자전거
+            <v-icon>mdi-bicycle</v-icon>
+          </v-btn>
+
+          <v-btn value="지하철">
+            지하철
+            <v-icon>mdi-subway-variant</v-icon>
+          </v-btn>
+
+          <v-btn value="버스">
+            버스
+            <v-icon>mdi-bus</v-icon>
+          </v-btn>
+
+          <v-btn value="네이버" href="https://www.naver.com">
+            네이버
+            <v-icon>mdi-web</v-icon>
+          </v-btn>
+        </v-bottom-navigation>
+      </v-footer>
+    </v-app>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify : new Vuetify(),
+      data : {
+        select: '',
+      }
+    })
+  </script>
+</body>
+</html>
