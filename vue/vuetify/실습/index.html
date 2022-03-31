@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <!-- nav bar -->
+      <v-app-bar app color="primary" dark fixed>
+        <v-app-bar-nav-icon @click="nDrawer = !nDrawer"></v-app-bar-nav-icon>
+        <v-toolbar-title>부산 관광 안내</v-toolbar-title>
+      </v-app-bar>
+
+      <v-navigation-drawer absolute temporary v-model="nDrawer">
+        <v-toolbar flat height="90px">
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar>
+                <v-icon class="grey white--text" large>mdi-account</v-icon>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>즐거운 부산</v-list-item-title>
+                <v-list-item-subtitle>다이나믹 부산</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-toolbar>
+        <v-divider></v-divider>
+
+        <!--메뉴리스트 -->
+        <v-list >
+          <v-list-item @click="" v-for="item in itemList" :href="item.link">
+            <v-list-item-action >
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <!-- 메인화면 -->
+      <v-main>
+        <v-container>
+          <h1 class="d-flex justify-center">현재 인기있는 곳 입니다</h1>
+          <p class="d-flex justify-center">추천을 통해 인기있는 곳을 선택해주세요</p>
+
+          <!-- 카드 -->
+          <v-row>
+            <v-col cols="12" sm="6" v-for="(i, index) in cards" :key="index">
+              <v-card>
+                <v-img :src="i.img" aspect-ratio="2" ></v-img>
+                <v-card-title>{{ i.title }}</v-card-title>
+                <v-card-actions>
+                  <p style="font-weight: 600;">{{ i.count }}</p>
+                  <v-spacer></v-spacer>
+                  <v-btn color="success" @click="up(index)" :value="i.title">추천</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+
+          <!-- 추천보드 -->
+        <v-container>
+          <v-hover>
+          <v-card >
+            <v-slide-x-transition group>
+              <v-list-item v-for="(a, index) in countUp" :key="index">
+                <v-list-item-content>
+                  <v-list-item-title>{{ a }}를 추천!</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-slide-x-transition>
+          </v-card>
+        </v-hover>
+        </v-container>
+
+
+      </v-main>
+    </v-app>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        nDrawer : false,
+        itemList : [
+          {
+            title : '메인페이지',
+            icon : 'mdi-card-bulleted-outline',
+            link : '#'
+          },
+          {
+            title : '관광지소개',
+            icon : 'mdi-clipboard-text',
+            link : '#'
+          },
+          {
+            title : '추천명소',
+            icon : 'mdi-check',
+            link : '#'
+          },
+        ],
+        cards : [
+          {
+            count:0,
+            title : "해운대",
+            img : "./img/해운대.jpg"
+          },
+          {
+            count:0,
+            title : "마린시티",
+            img : "./img/마린시티.jpg"
+          },
+          {
+            count:0,
+            title : "롯데월드",
+            img : "./img/부산롯데월드.png"
+          },
+          {
+            count:0,
+            title : "온천천",
+            img : "./img/온천천.png"
+          }
+        ],
+        countUp : [],
+      },
+      methods: {
+        up(a) {
+          this.countUp.push(this.cards[a].title)
+          this.cards[a].count++
+        }
+      }
+    })
+  </script>
+</body>
+</html>
